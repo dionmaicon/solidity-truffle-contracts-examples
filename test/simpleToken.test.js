@@ -25,6 +25,15 @@ contract('SimpleToken', ([deployer, seller, buyer]) => {
       const name = await simpleToken.name()
       assert.equal(name, 'Simple Token');
     })
+
+    it('should put 1000 SimpleToken in the first account', async () => {
+      const balance = await simpleToken.balanceOf.call(deployer);
+
+      assert.equal(balance.valueOf(), 1000, "1000 wasn't in the first account");
+    });
+
   })
+
+
 
 })
