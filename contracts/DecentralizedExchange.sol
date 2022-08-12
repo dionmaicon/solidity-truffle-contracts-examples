@@ -1,4 +1,5 @@
-pragma solidity >=0.4.25 <0.7.0;
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.7.0 <0.9.0;
 
 import "./SimpleToken.sol";
 
@@ -11,7 +12,7 @@ contract DecentralizedExchange {
     event Bought(uint256 amount);
     event Sold(uint256 amount);
 
-    constructor() public {
+    constructor() {
         token = new SimpleToken();
     }
 
@@ -26,12 +27,12 @@ contract DecentralizedExchange {
     }
 
     /* The user can decide to send tokens to get ether back */
-    function sell(uint256 amount) public {
+    function sell(uint256 amount) payable public {
       require(amount > 0, "You need to sell at least some tokens");
       uint256 allowance = token.allowance(msg.sender, address(this));
       require(allowance >= amount, "Check the token allowance");
       token.transferFrom(msg.sender, address(this), amount);
-      msg.sender.transfer(amount);
+      payable(msg.sender).transfer(amount);
       emit Sold(amount);
     }
 

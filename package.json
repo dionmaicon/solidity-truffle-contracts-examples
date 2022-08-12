@@ -1,7 +1,7 @@
 {
-  "name": "simple-defi-examples",
+  "name": "solidity-truffle-contracts-examples",
   "version": "0.1.0",
-  "description": "Simple DeFi examples",
+  "description": "Solidity Truffle Contracts Examples",
   "author": "dionmaicon@outlook.com",
   "dependencies": {
     "babel-polyfill": "6.26.0",
@@ -13,7 +13,7 @@
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "chai-bignumber": "3.0.0",
-    "truffle": "5.0.5"
+    "truffle": "5.5.26"
   },
   "browserslist": [
     ">0.2%",

@@ -1,4 +1,5 @@
-pragma solidity ^0.5.0;
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.7.0 <0.9.0;
 
 contract Market {
   string public name;
@@ -26,12 +27,12 @@ contract Market {
     string name,
     uint price,
     uint quantity,
-    address payable owner
+    address owner
   );
 
-  constructor() public {
+  constructor() {
     name = 'Market';
-    owner = msg.sender;
+    owner = payable(msg.sender);
   }
 
   function createProduct(string memory _name, uint _balance, uint _price) public {
@@ -63,7 +64,7 @@ contract Market {
     products[_id] = _product;
 
     //Pay the owner
-    address(owner).transfer(msg.value);
+    payable(owner).transfer(msg.value);
     //trigger an event
     emit  ProductPurchased(productCount, _product.name, msg.value, _quantity, msg.sender);
   }

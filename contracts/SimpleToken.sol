@@ -1,4 +1,6 @@
-pragma solidity >=0.4.25 <0.7.0;
+// SPDX-License-Identifier: MIT
+
+pragma solidity >=0.7.0 <0.9.0;
 
 interface IERC20 {
 
@@ -17,16 +19,12 @@ interface IERC20 {
 
 
 contract SimpleToken is IERC20 {
+    event Received(address caller, uint amount, string message);
 
     string public constant name = "Simple Token";
     string public constant symbol = "ERC";
     uint8 public constant decimals = 18;
     uint256 public constant total = 1000;
-
-
-    event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
-    event Transfer(address indexed from, address indexed to, uint tokens);
-
 
     mapping(address => uint256) balances;
 
@@ -37,10 +35,17 @@ contract SimpleToken is IERC20 {
     using SafeMath for uint256;
 
 
-   constructor() public {
+   constructor() {
     	totalSupply_ = total;
     	balances[msg.sender] = totalSupply_;
     }
+
+    fallback() external payable {
+        emit Received(msg.sender, msg.value, "Fallback was called");
+    }
+
+    receive() external payable {}
+
 
     function totalSupply() public view returns (uint256) {
 	     return totalSupply_;
