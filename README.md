@@ -2,8 +2,6 @@
 Simpe DeFi examples
 
 ## Run
-`cd simple-defi-examples`
-
 `npm install`
 ##  Test
 
